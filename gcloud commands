@@ -1,0 +1,67 @@
+gcloud commands
+
+gcloud auth list
+
+gcloud config set account amruth1397@gmail.com
+
+gcloud projects create terraform-amta-gke
+
+gcloud config set project terraform-amta-gke
+
+gcloud iam service-accounts create terraform-amta-gke-sa
+
+gcloud projects add-iam-policy-binding terraform-amta-gke --member="serviceAccount:terraform-amta-gke-sa@terraform-amta-gke.iam.gserviceaccount.com" --role="roles/owner"
+
+
+
+
+
+
+Step-by-step
+
+1) Create a Service Account
+
+gcloud iam service-accounts create terraform-amta-gke-sa --display-name "GCP Service Account"
+
+gcloud iam service-accounts create terraform-amta-gke-sa 
+
+2) List the users
+
+gcloud iam service-accounts list --filter terraform-amta-gke-sa@terraform-amta-gke.gserviceaccount.com
+
+3) Download the service account key
+
+gcloud iam service-accounts keys create ./somekey.json --iam-account amruth1397@falabella.cl
+
+gcloud iam service-accounts keys create terraform-amta-gke-sa.json --iam-account terraform-amta-gke-sa@terraform-amta-gke.gserviceaccount.com
+
+4) Associate a ROLE
+
+gcloud iam roles create <ROLE NAME> --project <YOUR PROJECT ID> --file ./rolename.yaml
+
+gcloud projects add-iam-policy-binding erraform-amta-gke --member "serviceAccount:terraform-amta-gke-sa@terraform-amta-gke.gserviceaccount.com" --role "roles/owner"
+
+gcloud projects add-iam-policy-binding <PROJECT ID> --role "roles/owner" --member serviceAccount:<EMAIL ADDRESS>
+
+5) Activate the service account
+
+gcloud auth activate-service-account --project=someproject --key-file=gcpcmdlineuser.json
+
+gcloud auth activate-service-account --key-file=gcpcmdlineuser.json
+
+GCP CLI’s which might help
+
+gcloud init --console-only
+
+gcloud config set account gcpcmdline@someproject.iam.gserviceaccount.com
+
+gcloud auth application-default login --no-launch-browser
+
+gcloud compute instances list
+
+gcloud auth list
+
+gcloud auth revoke
+
+gcloud info
+
